@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личная Веб-страница</title>
+    <style>
+        body {
+            font-family: 'Consolas', monospace;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        .contact-info a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        .blog-post {
+            margin-bottom: 20px;
+        }
+        .blog-post h3 {
+            margin: 0;
+            color: #555;
+        }
+        .blog-post p {
+            margin: 5px 0;
+        }
+        #secret-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #admin-panel {
+            display: none;
+            margin-top: 20px;
+        }
+        #admin-panel input, #admin-panel textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-family: 'Consolas', monospace;
+        }
+        #admin-panel button {
+            padding: 10px 20px;
+            font-family: 'Consolas', monospace;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ваш Никнейм</h1>
+        <button id="secret-button">🔑</button>
+    </header>
+    <div class="container">
+        <div class="contact-info">
+            <p>Telegram: <a href="https://t.me/yourusername" target="_blank">@yourusername</a></p>
+            <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+        </div>
+        <div class="blog">
+            <h2>Блог</h2>
+            <div id="blog-posts">
+                <div class="blog-post">
+                    <h3>Название поста 1</h3>
+                    <p>Дата публикации</p>
+                    <p>Краткое содержание поста...</p>
+                </div>
+                <div class="blog-post">
+                    <h3>Название поста 2</h3>
+                    <p>Дата публикации</p>
+                    <p>Краткое содержание поста...</p>
+                </div>
+            </div>
+        </div>
+        <div id="admin-panel">
+            <h2>Новый пост</h2>
+            <input type="text" id="post-title" placeholder="Название поста">
+            <input type="text" id="post-date" placeholder="Дата публикации">
+            <textarea id="post-content" placeholder="Содержание поста"></textarea>
+            <button onclick="addPost()">Добавить пост</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('secret-button').addEventListener('click', function() {
+            var password = prompt('Введите пароль:');
+            if (password === 'yourpassword') {
+                document.getElementById('admin-panel').style.display = 'block';
+            } else {
+                alert('Неверный пароль!');
+            }
+        });
+
+        function addPost() {
+            var title = document.getElementById('post-title').value;
+            var date = document.getElementById('post-date').value;
+            var content = document.getElementById('post-content').value;
+
+            if (title && date && content) {
+                var newPost = document.createElement('div');
+                newPost.className = 'blog-post';
+                newPost.innerHTML = '<h3>' + title + '</h3><p>' + date + '</p><p>' + content + '</p>';
+                document.getElementById('blog-posts').appendChild(newPost);
+
+                // Очистить поля
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-date').value = '';
+                document.getElementById('post-content').value = '';
+            } else {
+                alert('Пожалуйста, заполните все поля!');
+            }
+        }
+    </script>
+</body>
+</html>
